@@ -1,0 +1,30 @@
+text:
+  weight: 0.0
+  rewards:
+    svg_length_quadratic:
+      func: "svg_length_quadratic" # function name to call
+      weight: 1.0
+image:
+  weight: 1.0
+  rewards:
+    # img_l2_gray: # name of the reward
+    #   func: "img_l2" # function name to call
+    #   weight: 0.8
+    #   args:
+    #     blur: 21
+    #     gray: True
+    #     normalize: "avg_std"
+    img_l2_color:
+      func: "img_l2"
+      weight: 1.0
+      args:
+        blur: 21
+        gray: False
+        normalize: "avg_std"
+    # dino_score:
+    #   func: "dino_score"
+    #   weight: 1.0
+semantic:
+  weight: 0.0
+
+

@@ -1,0 +1,11 @@
+clip:
+  weight: 1.0
+  rewards:
+    QwenGeo:
+      func: "qwen_geo"
+      weight: 1.0
+      args:
+        # model_name: "/home/agent_h/data/llms/Qwen2___5-VL-7B-Instruct"
+        model_name: "/home/agent_h/data/llms/Qwen2___5-VL-32B-Instruct"
+        size: -1
+

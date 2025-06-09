@@ -1,0 +1,56 @@
+text:
+  weight: 0.0
+  rewards:
+    svg_length_quadratic:
+      func: "svg_length_quadratic" # function name to call
+      weight: 0.0
+image:
+  weight: 1.0
+  rewards:
+    # img_l2_gray: # name of the reward
+    #   func: "img_l2" # function name to call
+    #   weight: 0.8
+    #   args:
+    #     blur: 21
+    #     gray: True
+    #     normalize: "avg_std"
+    img_l2:
+      func: "img_l2"
+      weight: 0.2
+      args:
+        blur: 0
+        gray: False
+        normalize: "avg_std"
+    img_l2_canny:
+      func: "img_l2"
+      weight: 0.2
+      args:
+        canny: True
+        dilate: True
+        dilate_kernel_size: 3
+        dilate_iterations: 1
+        blur: 13
+    lpips:
+      func: "lpips"
+      weight: 0.2
+
+    dreamsim:
+      func: "dreamsim"
+      weight: 0.2
+      args:
+        model_path: "/home/agent_h/data/dreamsim_models"
+
+    dreamsim_canny_dl:
+      func: "dreamsim"
+      weight: 0.2
+      args:
+        model_path: "/home/agent_h/data/dreamsim_models"
+        canny: True
+        dilate: True
+        dilate_kernel_size: 3
+        dilate_iterations: 1
+
+semantic:
+  weight: 0.0
+
+

@@ -1,0 +1,25 @@
+clip:
+  weight: 1.0
+  rewards:
+    clip-ViT-L-14:
+      func: "clip"
+      weight: 0.0
+      args:
+        model_name: "/home/agent_h/data/llms/clip-ViT-L-14"
+    # Qwen7B_acc_large:
+    #   func: "qwen_clip"
+    #   weight: 0.5
+    #   args:
+    #     # model_name: "/home/agent_h/data/llms/Qwen2___5-VL-7B-Instruct"
+    #     model_name: "/home/agent_h/.cache/modelscope/hub/models/Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+    #     method: "image_accurate"
+    #     size: -1
+    # Qwen7B_resemble_small:
+    #   func: "qwen_clip"
+    #   weight: 0.5
+    #   args:
+    #     # model_name: "/home/agent_h/data/llms/Qwen2___5-VL-7B-Instruct"
+    #     model_name: "/home/agent_h/.cache/modelscope/hub/models/Qwen/Qwen2.5-VL-7B-Instruct-AWQ"
+    #     method: "draw"
+    #     size: -1
+
