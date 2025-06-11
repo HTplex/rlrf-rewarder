@@ -12,7 +12,7 @@ import yaml
 from pprint import pprint 
 from PIL import Image
 
-class SVGRewarderV2:
+class RewarderV2:
     def __init__(self, config_path=None):
         # get config path from env variable
         if config_path is None:
@@ -31,7 +31,7 @@ class SVGRewarderV2:
             # Image - Text Reward
             self.clip_rewarder = ClipRewarder(config=self.config["clip"]['rewards'])
 
-    def clip_compute_score(self, text: str, svg: str) -> Dict[str, float]:
+    def score_text_svg(self, text: str, svg: str) -> Dict[str, float]:
         MIN_REWARD = -1.0
         MAX_REWARD = 1.0
         RASTERIZE_SIZE = 512
@@ -55,7 +55,7 @@ class SVGRewarderV2:
         return reward_final
 
 
-    def svg_compute_score(self, svg_pred: str, svg_gt: str, img_gt: np.ndarray = None) -> Dict[str, float]:
+    def score_svg_svg(self, svg_pred: str, svg_gt: str, img_gt: np.ndarray = None) -> Dict[str, float]:
         MIN_REWARD = -1.0
         MAX_REWARD = 1.0
         RASTERIZE_SIZE = 512

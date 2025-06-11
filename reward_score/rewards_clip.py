@@ -2,6 +2,7 @@ from PIL import Image
 from sentence_transformers import SentenceTransformer, util
 import numpy as np
 import math
+import cv2
 
 class RewardClip:
     def __init__(self):
@@ -137,18 +138,18 @@ class QwenGeo:
                 
             """
         self.llm = None
-    def __call__(self, text: str, img: Image.Image, model_name: str, method: str = "draw", size:int=-1) -> float:
+    def __call__(self, text: str, img: np.ndarray, model_name: str, method: str = "draw", size:int=-1) -> float:
         if self.llm is None:
             self.llm = LLM(model=model_name, max_model_len=4096, trust_remote_code=True)
 
         prompt = self.system_prompt + self.prompt_geo + text + "\n<|im_end|>\n<|im_start|>assistant\n"
         size = 512
         # resize keep ratio
-        w, h = img.size
+        w, h = img.shape[:2]
         if w > h:
-            img = img.resize((size, int(size*h/w)))
+            img = cv2.resize(img, (size, int(size*h/w)))
         else:
-            img = img.resize((int(size*w/h), size))
+            img = cv2.resize(img, (int(size*w/h), size))
         # img = img.resize((size, size))
         vllm_inputs = [{"prompt": prompt, "multi_modal_data": {"image": [img]}}]
         sampling_params = SamplingParams(
@@ -219,7 +220,7 @@ class QwenClip:
         # img = img.resize((size, size))
         vllm_inputs = [{"prompt": prompt, "multi_modal_data": {"image": [img]}}]
         sampling_params = SamplingParams(
-            temperature=0.0, 
+            temperature=0.3, 
             max_tokens=10,
             logprobs=20,                 # ← request log-probs
             # repetition_penalty=0.5
